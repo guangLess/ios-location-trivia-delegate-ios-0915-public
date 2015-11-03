@@ -97,6 +97,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="addLocationTextField:" destination="eFU-jz-aJ7" eventType="editingChanged" id="aQC-Ap-OSg"/>
+                                    <action selector="textFieldEndEditing:" destination="eFU-jz-aJ7" eventType="editingDidEnd" id="9iR-cn-cOt"/>
                                 </connections>
                             </textField>
                         </subviews>

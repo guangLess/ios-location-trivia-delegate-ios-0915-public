@@ -8,7 +8,7 @@
 
 #import "FISAddLocationViewController.h"
 
-@interface FISAddLocationViewController ()
+@interface FISAddLocationViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
@@ -21,6 +21,20 @@
 {
     [super viewDidLoad];
     [self.saveButton setEnabled:NO];
+    self.nameField.delegate = self;
+    //[self.nameField isEditing : YES];
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.nameField becomeFirstResponder];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.nameField resignFirstResponder];
 }
 
 -(IBAction)cancelButtonTapped:(id)sender
@@ -35,10 +49,7 @@
 
 -(IBAction)saveButtonTapped:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(addLocationViewController:shouldAllowLocationNamed:)])
-    {
-        [self.delegate addLocationViewController:self didAddLocationNamed:self.nameField.text];
-    }
+    [self.delegate addLocationViewController:self didAddLocationNamed:self.nameField.text];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -49,17 +60,30 @@
     }
 }
 
--(BOOL)addLocationViewController:(FISAddLocationViewController *)viewController shouldAllowLocationNamed:(NSString *)locationName{
+-(IBAction)textFieldEndEditing:(UITextField *)sender
+{
+    NSLog(@"endEditing");
+    //[self.nameField resignFirstResponder];
+    //[self.view endEditing:YES];
+    //[self.saveButton setEnabled:YES];
 
-    return [self.locations containsObject:self.nameField];
+
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == self.nameField)
+    {
+        [textField resignFirstResponder];
+        return YES;
+    }
+    return NO;
+}
+
 
 -(BOOL)prefersStatusBarHidden
 {
     return YES;
 }
-
-
-
 
 @end

@@ -10,7 +10,7 @@
 #import "FISLocation.h"
 #import "FISAddLocationViewController.h"
 
-@interface FISLocationsViewController ()
+@interface FISLocationsViewController ()<FISAddLocationViewControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSMutableArray *triviaLocations;
 
@@ -22,10 +22,22 @@
     [super viewDidLoad];
 
     FISLocation *empireStateBuilding = [[FISLocation alloc] initWithName:@"Empire State Building" trivia:@[ @"1,454 Feet Tall", @"Cost $24,718,000 to build" ]];
-
     FISLocation *bowlingGreen = [[FISLocation alloc] initWithName:@"Bowling Green" trivia:@[ @"NYC's oldest park", @"Made a park in 1733", @"Charging Bull was created in 1989" ]];
-
     self.triviaLocations = [@[ empireStateBuilding, bowlingGreen ] mutableCopy];
+}
+
+#pragma mark - implenment delegate
+
+-(BOOL)addLocationViewController:(FISAddLocationViewController *)viewController shouldAllowLocationNamed:(NSString *)locationName{
+    
+    NSLog(@"addLocationViewController:shouldAllowLocationNamed: called on %@", [self class]);
+    return [self.triviaLocations containsObject:locationName];
+}
+
+-(void)addLocationViewController:(FISAddLocationViewController *)viewController didAddLocationNamed:(NSString *)locationName
+{
+    NSLog(@"addLocationViewController:didAddLocationNamed: called on %@", [self class]);
+    NSLog(@"did add: %@", locationName);
 }
 
 #pragma mark - Table view data source
@@ -60,7 +72,16 @@
 {
     FISAddLocationViewController * addVC = segue.destinationViewController;
     addVC.locations = self.triviaLocations;
-    addVC.delegate = self;
+    addVC.delegate = self; // VC is the delegate . addVC has delegate
 }
 
 @end
+
+
+/*
+ NOTE
+ VC is the delegate . addVC has delegate. Implenmetation needs to be done at the VC 
+ and addVC is where you custom it... 
+ 
+ */
+
