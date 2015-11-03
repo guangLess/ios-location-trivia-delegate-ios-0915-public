@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class FISAddLocationViewController; // why do you @class self in .h flie?
+
+@protocol FISAddLocationViewControllerDelegate <NSObject>
+
+-(void)addLocationViewControllerDidCancel:(FISAddLocationViewController *)viewController;
+-(BOOL)addLocationViewController:(FISAddLocationViewController *)viewController shouldAllowLocationNamed:(NSString *)locationName;
+-(void)addLocationViewController:(FISAddLocationViewController *)viewController didAddLocationNamed:(NSString *)locationName;
+
+@end
+
 @interface FISAddLocationViewController : UIViewController
+
+@property (nonatomic,weak) id <FISAddLocationViewControllerDelegate> delegate;
+@property (nonatomic,strong) NSMutableArray * locations;
 
 @end

@@ -95,6 +95,9 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="addLocationTextField:" destination="eFU-jz-aJ7" eventType="editingChanged" id="aQC-Ap-OSg"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <animations/>
@@ -102,6 +105,7 @@
                     </view>
                     <connections>
                         <outlet property="nameField" destination="fg4-su-5Ja" id="KzX-fv-JRL"/>
+                        <outlet property="saveButton" destination="pC6-mY-8mB" id="icS-Vs-5Ol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNJ-0G-UKO" userLabel="First Responder" sceneMemberID="firstResponder"/>

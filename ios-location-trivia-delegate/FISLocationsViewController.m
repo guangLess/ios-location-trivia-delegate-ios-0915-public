@@ -8,6 +8,7 @@
 
 #import "FISLocationsViewController.h"
 #import "FISLocation.h"
+#import "FISAddLocationViewController.h"
 
 @interface FISLocationsViewController ()
 
@@ -57,7 +58,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    FISAddLocationViewController * addVC = segue.destinationViewController;
+    addVC.locations = self.triviaLocations;
+    addVC.delegate = self;
 }
 
 @end

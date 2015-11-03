@@ -17,7 +17,6 @@
         self.name = name;
         self.trivia = [trivia mutableCopy];
     }
-
     return self;
 }
 
